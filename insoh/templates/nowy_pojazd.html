@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Jakaś stronka</title>
+
+
+	</head>
+	<body>
+
 
 <form action="" method="POST">{% csrf_token %}
-    <label>
-        ID
-        <input name="userID" value="">
+    <label>ID
+        <input name="userID" value="{{p.id}}">
     </label>
-    <label>
-        Nazwa:
-        <input name="nazwa" value="">
-    </label>
-    <label>
-        Baterie:
-        <input name="baterie" value="">
+    <label>Nazwa
+        <input name="nazwa" value="{{p.nazwa}}">
+    </label>Ilość baterii
+        <input name="baterie" value="{{il_bat}}">
     </label>
 
     <input type="submit" value="Zapisz"/>
 </form>
 
+<a href="pojazdy"> LISTA POJAZDÓW >>></a>
 
-</body>
+
+
+	</body>
 </html>

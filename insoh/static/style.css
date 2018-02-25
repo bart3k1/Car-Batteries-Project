@@ -7,3 +7,5 @@ h1, h2, h3, h4, h5, h6 {color:darkblue;}
 /* Header */
 #header { background:#eee; }
 #header-inner { margin:0 auto; padding:10px; width:970px;background:#fff;}
+
+#form {width:30%}

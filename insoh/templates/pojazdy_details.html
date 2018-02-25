@@ -4,42 +4,32 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Jakaś stronka</title>
-        <link rel="stylesheet" href="/static/style.css">
+
 
 	</head>
 	<body>
+
 {% for p in pojazdy %}
 	Auto :	{{ p.nazwa}}<br>
 		<!--{{ p.baterie.all}}<br>-->
-{% if p.baterie.all %}
-Baterie :	{% for i in p.baterie.all %}
-					 {{ i.id}}
-						{% if i.on %}
-						Włączona |
-						{% else %}
-						Wyłączona |
-					{% endif %}
-		{% endfor %}<br>
-{% else %}
-						Brak baterii <br>
-{% endif %}
-
+	{% if p.baterie.all %}
+		Baterie :	{% for i in p.baterie.all %}
+						{{ i.id}}
+									{% if i.on %}
+										Włączona |
+									{% else %}
+										Wyłączona |
+									{% endif %}
+					{% endfor %}<br>
+	{% else %}
+	Brak baterii <br>
+	{% endif %}
 {% endfor %}
 
 
-<!--{% if baterie != None %}-->
-	<!--BATERIE W AUCIE <br>-->
- 	<!--{% for x in baterie %}-->
-		<!--{{ x.id }} {{ x.nazwa }} {{ x.on }} {{ x.numer }} {{ x.batID }}<br>-->
-	<!--{% endfor %}-->
-
-	<!--{% else %}-->
-	<!--Brak baterii<br>-->
-<!--{% endif %}-->
+<a href="nowy_pojazd"> DODAJ NOWY POJAZD >>></a>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/static/app.js"></script>
 
 	</body>
 </html>
