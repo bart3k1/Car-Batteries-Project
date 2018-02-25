@@ -7,10 +7,13 @@
 
 
 	</head>
-	<body>
+	<a>
 
 {% for p in pojazdy %}
-	Auto :	{{ p.nazwa}}<br>
+<p>	Auto :	{{ p.nazwa}}
+<a href={% url 'nowy-pojazd' %}>EDYTUJ</a>
+
+		<br>
 		<!--{{ p.baterie.all}}<br>-->
 	{% if p.baterie.all %}
 		Baterie :	{% for i in p.baterie.all %}
@@ -24,11 +27,12 @@
 	{% else %}
 	Brak baterii <br>
 	{% endif %}
+</p>
 {% endfor %}
 
-
+<p>
 <a href="nowy_pojazd"> DODAJ NOWY POJAZD >>></a>
-
+</p>
 
 
 	</body>
