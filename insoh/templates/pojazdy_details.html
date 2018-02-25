@@ -14,7 +14,7 @@
 		<!--{{ p.baterie.all}}<br>-->
 	{% if p.baterie.all %}
 		Baterie :	{% for i in p.baterie.all %}
-						{{ i.id}}
+						{{ i.numer}}|{{ i.batID}}|
 									{% if i.on %}
 										Włączona |
 									{% else %}
