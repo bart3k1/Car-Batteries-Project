@@ -7,17 +7,18 @@ from django.views import View
 
 class PojazdyDetails(View):
     def get(self, request):
-        pojazd = Pojazdy.objects.get(id=4)
-        baterie = pojazd.baterie.all()
+        pojazdy = Pojazdy.objects.all()
+
+        # p1.baterie.add(b1)
+        # p1.baterie.all()
+
         return render(request, 'pojazdy_details.html', {
-            'pojazd': pojazd,
-            'baterie': baterie,
-
-
-        })
+            'pojazdy': pojazdy,
+           })
 
     def post(self, request):
         pass
+
 
 class NowyPojazd(View):
     def get(self, request):

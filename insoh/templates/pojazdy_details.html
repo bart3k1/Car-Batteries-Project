@@ -8,19 +8,34 @@
 
 	</head>
 	<body>
-	AUTO<br>
-	iserID: {{ pojazd.userID }}<br>
-	Nazwa: {{ pojazd.nazwa }}<br>
+{% for p in pojazdy %}
+	Auto :	{{ p.nazwa}}<br>
+		<!--{{ p.baterie.all}}<br>-->
+{% if p.baterie.all %}
+Baterie :	{% for i in p.baterie.all %}
+					 {{ i.id}}
+						{% if i.on %}
+						Włączona |
+						{% else %}
+						Wyłączona |
+					{% endif %}
+		{% endfor %}<br>
+{% else %}
+						Brak baterii <br>
+{% endif %}
 
-	BATERIE W AUTO <br>
- 	{% for x in baterie %}
-	{{ x.id }} {{ x.nazwa }} {{ x.on }} {{ x.numer }} {{ x.batID }}<br>
-	{% endfor %}
-<br>
-    COUNTER<br>
-    {{ counter }}
+{% endfor %}
 
 
+<!--{% if baterie != None %}-->
+	<!--BATERIE W AUCIE <br>-->
+ 	<!--{% for x in baterie %}-->
+		<!--{{ x.id }} {{ x.nazwa }} {{ x.on }} {{ x.numer }} {{ x.batID }}<br>-->
+	<!--{% endfor %}-->
+
+	<!--{% else %}-->
+	<!--Brak baterii<br>-->
+<!--{% endif %}-->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
