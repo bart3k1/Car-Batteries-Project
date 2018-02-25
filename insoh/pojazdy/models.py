@@ -6,8 +6,6 @@ from django.db import models
 class Pojazdy(models.Model):
     userID = models.CharField(max_length=64, unique=True, null=False)
     nazwa = models.CharField(max_length=50, null=False)
-    # bateries = models.ManyToManyField('Baterie', through="Dane")
-    bateries = models.ManyToManyField('Baterie')
 
 
 class Baterie(models.Model):
@@ -15,6 +13,7 @@ class Baterie(models.Model):
     numer = models.IntegerField(null=True)
     batID = models.IntegerField(null=True)
     on = models.BooleanField(default=True)
+    inpojazd = models.ForeignKey(Pojazdy,  null=True, related_name="baterie", on_delete=models.CASCADE)
 
 
 # class Dane(models.Model):
