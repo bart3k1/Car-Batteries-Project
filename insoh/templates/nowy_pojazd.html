@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form action="" method="POST">{% csrf_token %}
+    <label>
+        ID
+        <input name="userID" value=" ">
+    </label>
+    <label>
+        Nazwa:
+        <input name="nazwa" value=" ">
+    </label>
+    <label>
+        Baterie:
+        <input name="baterie" value=" ">
+    </label>
+
+    <input type="submit" value="Zapisz"/>
+</form>
+
+
+</body>
+</html>
