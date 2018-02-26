@@ -36,7 +36,7 @@ class NowyPojazd(View):
     def get(self, request):
         return render(request, 'nowy_pojazd.html', {
 })
-    
+
     def post(self, request):
         self.userID = request.POST['userID']
         self.nazwa = request.POST['nazwa']
@@ -68,6 +68,9 @@ class EdytujPojazd(View):
 
     def post(self, request, pojazd_id):
         p = Pojazdy.objects.get(id=pojazd_id)
+        p.userID = request.POST['userID']
+        p.nazwa = request.POST['nazwa']
+        p.save()
         if request.POST.getlist('doON'):
             a = request.POST.getlist('doON')
             for i in range(len(a)):
