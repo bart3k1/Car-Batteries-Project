@@ -32,7 +32,7 @@ class NowyPojazd(View):
             counterID += 2
         return redirect("/pojazdy")
 
-# do zrobienie widok edycji / url i template-formularz
+
 class EdytujPojazd(View):
     def get(self, request, pojazd_id):
         pojazd = Pojazdy.objects.get(id=pojazd_id)
@@ -48,11 +48,13 @@ class EdytujPojazd(View):
             'baterieAll': baterieAll,
 
            })
-    def post(self, request):
+    def post(self, request, pojazd_id):
+        p = Pojazdy.objects.get(id=pojazd_id)
         self.userID = request.POST['userID']
         self.nazwa = request.POST['nazwa']
+        #dodawanie baterii i usuwanie baterii zrobic!
         self.baterie = request.POST['baterie']
-        p = Pojazdy.objects.create(userID=self.userID, nazwa=self.nazwa)
+        # jesli sa - to countery sie zmieniaja
         counter = 1
         counterID = 5
         for _ in range(int(self.baterie)):
