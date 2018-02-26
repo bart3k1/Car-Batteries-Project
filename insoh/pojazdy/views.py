@@ -5,11 +5,38 @@ from django.views import View
 
 # Create your views here.
 
+from django.template.defaulttags import register
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
+
+
 class PojazdyDetails(View):
     def get(self, request):
         pojazdy = Pojazdy.objects.all()
+
+        batDict = {}
+        for p in pojazdy:
+            if p.baterie.all():
+                batDict[p] = 0
+                for b in p.baterie.all():
+                    if b.on:
+                        batDict[p] += 1
+        print(batDict)
+
+        batDictAll = {}
+        for p in pojazdy:
+            if p.baterie.all():
+                batDictAll[p] = 0
+                for _ in range(len(p.baterie.all())):
+                    batDictAll[p] += 1
+
+        print(batDictAll)
+
         return render(request, 'pojazdy_details.html', {
             'pojazdy': pojazdy,
+            'batDict': batDict,
+            'batDictAll': batDictAll,
            })
 
 

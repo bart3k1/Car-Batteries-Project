@@ -10,25 +10,34 @@
 	<a>
 
 {% for p in pojazdy %}
+
+
+
 <p>	Auto :	{{ p.nazwa}}
 <a href={% url 'edytuj-pojazd' p.id  %}>Edytuj </a>
 
 		<br>
-		<!--{{ p.baterie.all}}<br>-->
 	{% if p.baterie.all %}
-		Baterie :	{% for i in p.baterie.all %}
-						{{ i.numer}}|{{ i.batID}}|
-									{% if i.on %}
-									<font color="green">	Włączona</font>
-	
-									{% else %}
-									<font color="red"> Wyłączona | </font>
-
-									{% endif %}
-					{% endfor %}<br>
+	Baterie: {{ batDict|get_item:p }}/{{ batDictAll|get_item:p }}  <br>
 	{% else %}
-	Brak baterii <br>
+	Baterie: 0/0
 	{% endif %}
+
+	<!--{% if p.baterie.all %}-->
+		<!--Baterie :	{% for i in p.baterie.all %}-->
+						<!--{{ i.numer}}|{{ i.batID}}|-->
+									<!--{% if i.on %}-->
+									<!--<font color="green">	Włączona</font>-->
+
+									<!--{% else %}-->
+									<!--<font color="red"> Wyłączona | </font>-->
+
+									<!--{% endif %}-->
+					<!--{{ forloop.counter }}-->
+					<!--{% endfor %}<br>-->
+	<!--{% else %}-->
+	<!--Brak baterii <br>-->
+	<!--{% endif %}-->
 </p>
 {% endfor %}
 
