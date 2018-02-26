@@ -38,9 +38,9 @@ class EdytujPojazd(View):
         pojazd = Pojazdy.objects.get(id=pojazd_id)
         pojazdy = Pojazdy.objects.all()
         baterieAll = len(pojazd.baterie.all())
-        print(baterieAll)
+        # print(baterieAll)
         baterieON = len(pojazd.baterie.filter(on=True))
-        print(baterieON)
+        # print(baterieON)
         return render(request, 'edytuj_pojazd.html', {
             'pojazdy': pojazdy,
             'pojazd': pojazd,
@@ -48,20 +48,42 @@ class EdytujPojazd(View):
             'baterieAll': baterieAll,
 
            })
+
     def post(self, request, pojazd_id):
         p = Pojazdy.objects.get(id=pojazd_id)
-        self.userID = request.POST['userID']
-        self.nazwa = request.POST['nazwa']
-        #dodawanie baterii i usuwanie baterii zrobic!
-        self.baterie = request.POST['baterie']
-        # jesli sa - to countery sie zmieniaja
-        counter = 1
-        counterID = 5
-        for _ in range(int(self.baterie)):
-            b = Baterie.objects.create(numer=counter, batID=counterID)
-            b.inpojazd = p
-            b.save()
-            counter += 1
-            counterID += 2
+        if request.POST.getlist('batDel'):
+            print(request.POST.getlist('batDel'))
+            a = request.POST.getlist('batDel')
+            for i in a:
+                x = Baterie.objects.get(id=int(i))
+                x.delete()
+
+        if request.POST['baterie'] != "Bez zmian":
+            if len(p.baterie.all()) > 0:
+                listBat = []
+                batAll = p.baterie.all()
+                for i in batAll:
+                    listBat.append(i)
+                print(listBat[-1].batID)
+                counter = (listBat[-1].batID) + 1
+                counterID = (listBat[-1].batID) + 2
+                for _ in range(int(request.POST['baterie'])):
+                    b = Baterie.objects.create(numer=counter, batID=counterID)
+                    b.inpojazd = p
+                    b.save()
+                    counter += 1
+                    counterID += 2
+            else:
+                p = Pojazdy.objects.get(id=pojazd_id)
+                counter = 1
+                counterID = 5
+                for _ in range(int(request.POST['baterie'])):
+                    b = Baterie.objects.create(numer=counter, batID=counterID)
+                    b.inpojazd = p
+                    b.save()
+                    counter += 1
+                    counterID += 2
+                return redirect("/pojazdy")
+
         return redirect("/pojazdy")
 

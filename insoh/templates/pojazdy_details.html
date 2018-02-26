@@ -19,9 +19,11 @@
 		Baterie :	{% for i in p.baterie.all %}
 						{{ i.numer}}|{{ i.batID}}|
 									{% if i.on %}
-										Włączona |
+									<font color="green">	Włączona</font>
+	
 									{% else %}
-										Wyłączona |
+									<font color="red"> Wyłączona | </font>
+
 									{% endif %}
 					{% endfor %}<br>
 	{% else %}

@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('pojazdy', PojazdyDetails.as_view(), name="pojazdy-details"),
     path('nowy_pojazd', NowyPojazd.as_view(), name="nowy-pojazd"),
-    path('edytuj_pojazd/(?P<pojazd_id>\d+)$', EdytujPojazd.as_view(), name="edytuj-pojazd"),
+    path('edytuj_pojazd/<pojazd_id>', EdytujPojazd.as_view(), name="edytuj-pojazd"),
 ]

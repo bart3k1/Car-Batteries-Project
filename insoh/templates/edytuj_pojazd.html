@@ -8,7 +8,7 @@
 <form action="" method="POST"> {% csrf_token %}
     <label>
         ID<br>
-        <input name="user_id" value="{{ pojazd.userID }}">
+        <input name="userID" value="{{ pojazd.userID }}">
     </label>
     <br>
     <label>
@@ -19,19 +19,34 @@
     <label>
         Baterie:<br> {{ baterieON}}/{{baterieAll}}<br>
         Dodaj baterie:<br>
-        <input name="baterie_all" value="">
+        <input name="baterie" value="Bez zmian">
     </label>
  <br>
+
+    {% if pojazd.baterie.all %}
+		Włącz/Wyłącz baterie :<br>
+    {% for i in pojazd.baterie.all %}
+					 	{{ i.numer}}|{{ i.batID}}|
+									{% if i.on %}
+									<font color="green">	Włączona</font>
+									{% else %}
+									<font color="red"> Wyłączona | </font>
+									{% endif %}
+					{% endfor %}<br>
+	{% else %}
+	Brak baterii <br>
+	{% endif %}
+</p>
+
+
 
 
      <label>
         Usuń baterie:<br>
 
          {%for x in pojazd.baterie.all %}
-    <input type="checkbox">
-            <label value="{{x.id}}">{{ x.batID }}</label>
-    </input>
-          {%endfor %}
+    <input type="checkbox" name="batDel" value="{{x.id}}"> {{ x.batID }}
+         {%endfor %}
 
      </label>
 <!--<br>-->
