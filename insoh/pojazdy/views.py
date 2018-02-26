@@ -22,7 +22,7 @@ class PojazdyDetails(View):
                 for b in p.baterie.all():
                     if b.on:
                         batDict[p] += 1
-        print(batDict)
+        # print(batDict)
 
         batDictAll = {}
         for p in pojazdy:
@@ -31,7 +31,7 @@ class PojazdyDetails(View):
                 for _ in range(len(p.baterie.all())):
                     batDictAll[p] += 1
 
-        print(batDictAll)
+        # print(batDictAll)
 
         return render(request, 'pojazdy_details.html', {
             'pojazdy': pojazdy,
@@ -78,8 +78,35 @@ class EdytujPojazd(View):
 
     def post(self, request, pojazd_id):
         p = Pojazdy.objects.get(id=pojazd_id)
+        if request.POST.getlist('doON'):
+            print('MAMY DOON')
+            a = request.POST.getlist('doON')
+            for i in range(len(a)):
+                if a[i] == 'ON':
+                    idON = p.baterie.all()[i].id
+                    x = Baterie.objects.get(id=idON)
+                    print(x.on)
+                    x.on = True
+                    x.save()
+        if request.POST.getlist('doOFF'):
+            print('MAMY TOOFF')
+            a = request.POST.getlist('doOFF')
+            for i in range(len(a)):
+                if a[i] == 'OFF':
+                    idOFF = p.baterie.all()[i].id
+                    x = Baterie.objects.get(id=idOFF)
+                    print(x.on)
+                    x.on = False
+                    x.save()
+
+
+            # for i in range(len(a)):
+                # x = Baterie.objects.get(id=i)
+                # print(x)
+                # x.on = False
+                # x.save()
         if request.POST.getlist('batDel'):
-            print(request.POST.getlist('batDel'))
+            # print(request.POST.getlist('batDel'))
             a = request.POST.getlist('batDel')
             for i in a:
                 x = Baterie.objects.get(id=int(i))
@@ -91,7 +118,7 @@ class EdytujPojazd(View):
                 batAll = p.baterie.all()
                 for i in batAll:
                     listBat.append(i)
-                print(listBat[-1].batID)
+                # print(listBat[-1].batID)
                 counter = (listBat[-1].batID) + 1
                 counterID = (listBat[-1].batID) + 2
                 for _ in range(int(request.POST['baterie'])):

@@ -4,47 +4,26 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Jakaś stronka</title>
-
-
 	</head>
-	<a>
 
-{% for p in pojazdy %}
+<body>
+	{% for p in pojazdy %}
+	<p>
+		Pojazd {{ forloop.counter }} <br>
+		Nazwa: {{ p.nazwa}} | ID: {{p.userID}} <br>
 
-
-
-<p>	Auto :	{{ p.nazwa}}
-<a href={% url 'edytuj-pojazd' p.id  %}>Edytuj </a>
-
-		<br>
-	{% if p.baterie.all %}
-	Baterie: {{ batDict|get_item:p }}/{{ batDictAll|get_item:p }}  <br>
-	{% else %}
-	Baterie: 0/0
-	{% endif %}
-
-	<!--{% if p.baterie.all %}-->
-		<!--Baterie :	{% for i in p.baterie.all %}-->
-						<!--{{ i.numer}}|{{ i.batID}}|-->
-									<!--{% if i.on %}-->
-									<!--<font color="green">	Włączona</font>-->
-
-									<!--{% else %}-->
-									<!--<font color="red"> Wyłączona | </font>-->
-
-									<!--{% endif %}-->
-					<!--{{ forloop.counter }}-->
-					<!--{% endfor %}<br>-->
-	<!--{% else %}-->
-	<!--Brak baterii <br>-->
-	<!--{% endif %}-->
-</p>
-{% endfor %}
+		{% if p.baterie.all %}
+			Baterie: {{ batDict|get_item:p }}/{{ batDictAll|get_item:p }}  <br>
+		{% else %}
+			Baterie: 0/0 <br>
+		{% endif %}
+	<a href={% url 'edytuj-pojazd' p.id  %}>Edytuj </a>
+	</p>
+	{% endfor %}
 
 <p>
 <a href="nowy_pojazd"> DODAJ NOWY POJAZD >>></a>
 </p>
 
-
-	</body>
+</body>
 </html>

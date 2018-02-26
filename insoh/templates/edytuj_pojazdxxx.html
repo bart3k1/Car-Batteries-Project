@@ -29,19 +29,9 @@
 					 	{{ i.numer}}|{{ i.batID}}|
 
 									{% if i.on %}
-
-                                        <select name="doOFF">
-                                        <!--<option color="green" value="{{i.id}}" hidden="true"  selected="selected">ON</option>-->
-                                        <option value="ON">ON</option>
-                                        <option value="OFF">OFF</option>
-                                        </select>
-
+									<font color="green">	Włączona</font>
 									{% else %}
-									    <select name="doON">
-                                        <!--<option color="red" value="{{i.id}}" hidden="true" selected="selected">OFF</option>-->
-                                        <option value="OFF">OFF</option>
-                                        <option value="ON">ON</option>
-                                        </select>
+									<font color="red"> Wyłączona | </font>
 									{% endif %}
 
 								{% endfor %}<br>
@@ -51,7 +41,11 @@
 </p>
 
 
-
+    <select>
+    <option value="" disabled="disabled" selected="selected">Please select a name</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    </select>
 
 
 

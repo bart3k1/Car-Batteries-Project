@@ -9,22 +9,24 @@
 	</head>
 	<body>
 
+    <p>
+        <form action="" method="POST">{% csrf_token %}
+            <label>ID<br>
+                <input name="userID" value="{{p.id}}">
+            </label><br>
+            <label>Nazwa<br>
+                <input name="nazwa" value="{{p.nazwa}}">
+            </label><br>
+            <label>Ilość baterii<br>
+                <input name="baterie" value="{{il_bat}}">
+            </label><br>
 
-<form action="" method="POST">{% csrf_token %}
-    <label>ID
-        <input name="userID" value="{{p.id}}">
-    </label>
-    <label>Nazwa
-        <input name="nazwa" value="{{p.nazwa}}">
-    </label>Liczba baterii
-        <input name="baterie" value="{{il_bat}}">
-    </label>
-
-    <input type="submit" value="Zapisz"/>
-</form>
-
-<a href="pojazdy"> LISTA POJAZDÓW >>></a>
-
+            <input type="submit" value="Zapisz"/>
+        </form>
+    </p>
+    <p>
+        <a href="pojazdy"> LISTA POJAZDÓW >>></a>
+    </p>
 
 
 	</body>
