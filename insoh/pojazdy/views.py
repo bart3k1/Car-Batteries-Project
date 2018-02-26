@@ -34,9 +34,20 @@ class NowyPojazd(View):
 
 # do zrobienie widok edycji / url i template-formularz
 class EdytujPojazd(View):
-    def get(self, request):
+    def get(self, request, pojazd_id):
+        pojazd = Pojazdy.objects.get(id=pojazd_id)
+        pojazdy = Pojazdy.objects.all()
+        baterieAll = len(pojazd.baterie.all())
+        print(baterieAll)
+        baterieON = len(pojazd.baterie.filter(on=True))
+        print(baterieON)
         return render(request, 'edytuj_pojazd.html', {
-        })
+            'pojazdy': pojazdy,
+            'pojazd': pojazd,
+            'baterieON': baterieON,
+            'baterieAll': baterieAll,
+
+           })
     def post(self, request):
         self.userID = request.POST['userID']
         self.nazwa = request.POST['nazwa']
@@ -51,3 +62,4 @@ class EdytujPojazd(View):
             counter += 1
             counterID += 2
         return redirect("/pojazdy")
+

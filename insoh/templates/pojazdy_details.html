@@ -11,7 +11,7 @@
 
 {% for p in pojazdy %}
 <p>	Auto :	{{ p.nazwa}}
-<a href={% url 'nowy-pojazd' %}>EDYTUJ</a>
+<a href={% url 'edytuj-pojazd' p.id  %}>Edytuj </a>
 
 		<br>
 		<!--{{ p.baterie.all}}<br>-->

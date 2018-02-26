@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from pojazdy.views import PojazdyDetails, NowyPojazd
+from pojazdy.views import PojazdyDetails, NowyPojazd, EdytujPojazd
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('pojazdy', PojazdyDetails.as_view(), name="pojazdy-details"),
     path('nowy_pojazd', NowyPojazd.as_view(), name="nowy-pojazd"),
+    path('edytuj_pojazd/(?P<pojazd_id>\d+)$', EdytujPojazd.as_view(), name="edytuj-pojazd"),
 ]
