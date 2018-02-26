@@ -14,13 +14,3 @@ class Baterie(models.Model):
     batID = models.IntegerField(null=True)
     on = models.BooleanField(default=True)
     inpojazd = models.ForeignKey(Pojazdy,  null=True, related_name="baterie", on_delete=models.CASCADE)
-
-
-# class Dane(models.Model):
-#     pojazd = models.ForeignKey(Pojazdy, on_delete=models.CASCADE)
-#     bateria = models.ForeignKey(Baterie, on_delete=models.CASCADE)
-#     numer = models.IntegerField(null=True)
-#     batID = models.IntegerField(null=True)
-#     on = models.BooleanField(default=True)
-#     # ilosc = models.IntegerField(null=True)
-#     # niepotrzebna bo mozna zliczyc po id auta
