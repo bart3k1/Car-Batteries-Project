@@ -22,64 +22,41 @@
         <input name="baterie" value="Bez zmian">
     </label>
  <br>
-
     {% if pojazd.baterie.all %}
-		Włącz/Wyłącz baterie :<br>
-    {% for i in pojazd.baterie.all %}
-					 	{{ i.numer}}|{{ i.batID}}|
+            Włącz/Wyłącz baterie :<br>
+        {% for i in pojazd.baterie.all %}
+            {{ i.numer}}|{{ i.batID}}|
+                    {% if i.on %}
+                        <select name="doOFF">
+                        <!--<option color="green" value="{{i.id}}" hidden="true"  selected="selected">ON</option>-->
+                        <option value="ON">ON</option>
+                        <option value="OFF">OFF</option>
+                        </select>
+                    {% else %}
+                        <select name="doON">
+                        <!--<option color="red" value="{{i.id}}" hidden="true" selected="selected">OFF</option>-->
+                        <option value="OFF">OFF</option>
+                        <option value="ON">ON</option>
+                        </select>
+                    {% endif %}
+        {% endfor %}<br>
+    {% else %}
+        Brak baterii <br>
+    {% endif %}
 
-									{% if i.on %}
-
-                                        <select name="doOFF">
-                                        <!--<option color="green" value="{{i.id}}" hidden="true"  selected="selected">ON</option>-->
-                                        <option value="ON">ON</option>
-                                        <option value="OFF">OFF</option>
-                                        </select>
-
-									{% else %}
-									    <select name="doON">
-                                        <!--<option color="red" value="{{i.id}}" hidden="true" selected="selected">OFF</option>-->
-                                        <option value="OFF">OFF</option>
-                                        <option value="ON">ON</option>
-                                        </select>
-									{% endif %}
-
-								{% endfor %}<br>
-	{% else %}
-	Brak baterii <br>
-	{% endif %}
-</p>
-
-
-
-
-
-
-
-     <label>
+    <label>
         Usuń baterie:<br>
-
-         {%for x in pojazd.baterie.all %}
+        {%for x in pojazd.baterie.all %}
     <input type="checkbox" name="batDel" value="{{x.id}}"> {{ x.batID }}
          {%endfor %}
+     </label><br>
 
-     </label>
-<!--<br>-->
-       <!--<label>-->
-        <!--Baterie usuń:-->
-        <!--<select name="baterie_del">-->
-            <!--{%for x in pojazd.baterie.all %}-->
-            <!--<option value="{{x.id}}">{{ x.batID }}</option>-->
-            <!--{%endfor %}-->
-        <!--</select>-->
-    <!--</label>-->
-   <!--<br>-->
-    <br>
     <input type="submit" value="Zapisz"/>
 
     <p>
         <a href="/pojazdy">BACK <<<</a>
     </p>
+
 </form>
 </body>
 </html>
