@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,6 +21,29 @@
 
         <input name="baterie_all" value="{{ baterieAll }}">
     </label>
+ <br>
+
+
+     <label>
+        Usuń baterie:<br>
+
+         {%for x in pojazd.baterie.all %}
+    <input type="checkbox">
+            <label value="{{x.id}}">{{ x.batID }}</label>
+    </input>
+          {%endfor %}
+
+     </label>
+<!--<br>-->
+       <!--<label>-->
+        <!--Baterie usuń:-->
+        <!--<select name="baterie_del">-->
+            <!--{%for x in pojazd.baterie.all %}-->
+            <!--<option value="{{x.id}}">{{ x.batID }}</option>-->
+            <!--{%endfor %}-->
+        <!--</select>-->
+    <!--</label>-->
+   <!--<br>-->
     <br>
     <input type="submit" value="Zapisz"/>
 
