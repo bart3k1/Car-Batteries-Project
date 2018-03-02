@@ -38,13 +38,13 @@ class NowyPojazd(View):
 })
 
     def post(self, request):
-        self.userID = request.POST['userID']
-        self.nazwa = request.POST['nazwa']
-        self.baterie = request.POST['baterie']
-        p = Pojazdy.objects.create(userID=self.userID, nazwa=self.nazwa)
+        userID = request.POST['userID']
+        nazwa = request.POST['nazwa']
+        baterie = request.POST['baterie']
+        p = Pojazdy.objects.create(userID=userID, nazwa=nazwa)
         counter = 1
         counterID = 5
-        for _ in range(int(self.baterie)):
+        for _ in range(int(baterie)):
             b = Baterie.objects.create(numer=counter, batID=counterID)
             b.inpojazd = p
             b.save()
@@ -73,20 +73,35 @@ class EdytujPojazd(View):
         p.save()
         if request.POST.getlist('doON'):
             a = request.POST.getlist('doON')
+            aOn = p.baterie.all().filter(on=False)
+            y = []
             for i in range(len(a)):
                 if a[i] == 'ON':
-                    idON = p.baterie.all()[i].id
-                    x = Baterie.objects.get(id=idON)
-                    x.on = True
-                    x.save()
+                    y.append(i)
+            z = []
+            for i in y:
+                idON = aOn[i].id
+                z.append(idON)
+            for i in z:
+                x = Baterie.objects.get(id=i)
+                x.on = True
+                x.save()
         if request.POST.getlist('doOFF'):
             a = request.POST.getlist('doOFF')
+            aOff = p.baterie.all().filter(on=True)
+            y = []
             for i in range(len(a)):
                 if a[i] == 'OFF':
-                    idOFF = p.baterie.all()[i].id
-                    x = Baterie.objects.get(id=idOFF)
-                    x.on = False
-                    x.save()
+                    y.append(i)
+            z = []
+            for i in y:
+                idOFF = aOff[i].id
+                z.append(idOFF)
+            for i in z:
+                x = Baterie.objects.get(id=i)
+                x.on = False
+                x.save()
+
         if request.POST.getlist('batDel'):
             a = request.POST.getlist('batDel')
             for i in a:

@@ -3,13 +3,13 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Jakaś stronka</title>
+		<title>Pojazdy lista</title>
 	</head>
 
 <body>
 	{% for p in pojazdy %}
 	<p>
-		Pojazd {{ forloop.counter }} <br>
+		Pojazd {{ forloop.counter }}:
 		Nazwa: {{ p.nazwa}} | ID: {{p.userID}} <br>
 
 		{% if p.baterie.all %}
