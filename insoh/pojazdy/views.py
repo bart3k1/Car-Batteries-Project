@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+from pojazdy.forms import PojazdyForm, EditPojazdyForm
 from pojazdy.models import Pojazdy, Baterie
 from django.views import View
 from django.template.defaulttags import register
+
+
 
 
 @register.filter
@@ -134,3 +139,52 @@ class EdytujPojazd(View):
                 return redirect("/pojazdy")
         return redirect("/pojazdy")
 
+################################################
+
+class AddPojazdView(View):
+    def get(self, request):
+        ctx = {
+            'form': PojazdyForm,
+        }
+        return render(request, 'add_pojazd.html', ctx)
+
+    def post(self, request):
+        form = PojazdyForm(request.POST)
+        if form.is_valid():
+            pojazd = Pojazdy.objects.create(
+                userID=form.cleaned_data['userID'],
+                nazwa=form.cleaned_data['nazwa'],
+                )
+            baterie = request.POST['baterie']
+            counter = 1
+            counterID = 5
+            for _ in range(int(baterie)):
+                b = Baterie.objects.create(numer=counter, batID=counterID)
+                b.inpojazd = pojazd
+                b.save()
+                counter += 1
+                counterID += 2
+            return HttpResponseRedirect(
+                reverse('pojazdy-details')
+            )
+        ctx = {
+            'form': PojazdyForm,
+        }
+        return render(request, 'add_pojazd.html', ctx)
+
+
+class EditPojazdyView(View):
+    def get(self, request, pojazd_id):
+        pojazd = Pojazdy.objects.get(pk=pojazd_id)
+        form = EditPojazdyForm(initial={
+            'userID': pojazd.userID,
+            'nazwa': pojazd.nazwa,
+            'baterie': len(pojazd.baterie.all()),
+            'baterie_on': Baterie.objects.filter(inpojazd_id=pojazd_id),
+            'pojazd_id': pojazd_id
+        })
+        ctx = {
+            'form': form,
+
+            }
+        return render(request, 'edit_pojazd.html', ctx)

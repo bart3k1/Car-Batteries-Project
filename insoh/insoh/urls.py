@@ -16,11 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from pojazdy.views import PojazdyDetails, NowyPojazd, EdytujPojazd
+from pojazdy.views import PojazdyDetails, NowyPojazd, EdytujPojazd, AddPojazdView, EditPojazdyView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('pojazdy', PojazdyDetails.as_view(), name="pojazdy-details"),
     path('nowy_pojazd', NowyPojazd.as_view(), name="nowy-pojazd"),
     path('edytuj_pojazd/<pojazd_id>', EdytujPojazd.as_view(), name="edytuj-pojazd"),
+    path('add_pojazd', AddPojazdView.as_view(), name="add-pojazd"),
+    path('edit_pojazd/<pojazd_id>', EditPojazdyView.as_view(), name="edit-pojazd"),
 ]
